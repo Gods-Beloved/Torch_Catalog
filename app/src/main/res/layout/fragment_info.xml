@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Enroll">
+
+
+    <TextView
+        android:id="@+id/v_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hello Info fragment" />
+
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/v_display"
+    android:layout_gravity="center"
+    android:layout_marginTop="100dp"
+    style="@style/display"
+    android:text="display"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+</LinearLayout>

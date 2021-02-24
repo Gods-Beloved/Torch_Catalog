@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Torch Catalog</string>
+    <string name="email">Email*</string>
+    <string name="username">Username*</string>
+    <string name="password">Password*</string>
+    <string name="password2">Confirm Password*</string>
+    <string name="required_fields">Required Fields*</string>
+    <string name="course">Course*</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_registered_login">Already registered?Login</string>
+    <string name="already_registered">Already registered?</string>
+    <string name="login">Login.</string>
+
+
+    <string name="back4app_server_url" translatable="false">https://parseapi.back4app.com/</string>
+    <!-- Change the following strings with your ones
+    Steps to find your strings :
+    1) Go to your App Dashboard at Back4App website.
+    2) Navigate to app's settings : Click on Server Settings -> Core Settings block -> SETTINGS
+    -->
+    <string name="back4app_app_id" translatable="false">Cw1ctWD3aLObVdymhSkTzy4UCQ9kYKvjqvq2hK1L</string>
+    <string name="back4app_client_key" translatable="false">75B1ikFg9moqLZT1Y86kWQ6V5RxRJ0g2t3w9zYHW</string>
+    <string name="search">Search</string>
+    <string name="notifcations">Notifcations</string>
+    <string name="settings">settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="enroll">Enroll</string>
+    <string name="info">info</string>
+</resources>
