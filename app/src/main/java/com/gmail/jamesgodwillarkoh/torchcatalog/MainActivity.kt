@@ -3,7 +3,6 @@ package com.gmail.jamesgodwillarkoh.torchcatalog
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -12,15 +11,12 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
-import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.parse.ParseException
 import com.parse.ParseObject
 import com.parse.ParseUser
-import com.parse.SignUpCallback
 
 class MainActivity : AppCompatActivity() {
 
@@ -120,28 +116,33 @@ class MainActivity : AppCompatActivity() {
             user.put("Course",textCourse.text.toString())
             user.email=textEmail.text.toString()
             user.setPassword(textPasswordConfirm.text.toString())
+
+
             user.put("verified",ParseObject.createWithoutData("Enrolled","JJpOvVSDvl"))
 
 
+                user.signUpInBackground {
 
-      user.signUpInBackground {
+                    e ->
 
-          e ->
+                    if(e==null) {
 
-          if(e==null) {
+                        Toast.makeText(this@MainActivity,"Signed Up",Toast.LENGTH_LONG).show()
+                        val intent=Intent(this@MainActivity,Login::class.java)
+                        startActivity(intent)
 
-              Toast.makeText(this@MainActivity,"Signed Up",Toast.LENGTH_LONG).show()
-              val intent=Intent(this@MainActivity,Login::class.java)
-              startActivity(intent)
+                        ParseUser.logOut()
 
-              ParseUser.logOut()
+                    }else {
+                        Toast.makeText(this@MainActivity,e.message,Toast.LENGTH_LONG).show()
+                        shimmer.hideShimmer()
 
-          }else {
-              Toast.makeText(this@MainActivity,e.message,Toast.LENGTH_LONG).show()
-              shimmer.hideShimmer()
+                    }
+                }
 
-          }
-      }
+
+
+
 
         }
 

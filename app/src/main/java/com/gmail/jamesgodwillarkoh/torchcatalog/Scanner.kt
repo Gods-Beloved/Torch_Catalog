@@ -12,13 +12,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.budiyev.android.codescanner.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.parse.GetCallback
-import com.parse.ParseObject
-import com.parse.ParseQuery
-import com.parse.ParseUser
+import com.parse.*
 
 
 class Scanner : AppCompatActivity() {
+
     private lateinit var codeScanner:CodeScanner
 
     private lateinit var codeScannerView: CodeScannerView
@@ -57,7 +55,7 @@ codeScanner=CodeScanner(this,codeScannerView)
 
                  val extras=intent.extras
 
-                 val value:String
+                 var value:String
 
                  if (extras != null)
                  {
@@ -81,27 +79,92 @@ codeScanner=CodeScanner(this,codeScannerView)
                              .setPositiveButton("ACCEPT"){
                                  dialog, which ->
 
-                                 val query=ParseQuery.getQuery<ParseObject>("User")
-                                 query.getInBackground(ParseUser.getCurrentUser().objectId) {
 
-                                     `object`, e ->
-
-                                     if (e==null)
-                                     {
-                                         `object`.getParseObject("verified")?.fetchIfNeededInBackground<ParseObject> {
-                                             object2,
-
-                                             e2 ->if (e2==null)
-                                         {
-                                             Toast.makeText(this@Scanner,object2.get("mas_261").toString(),Toast.LENGTH_LONG).show()
-                                         }
-
-                                         }
-                                     }
+                                 val currentUser=ParseUser.getCurrentUser()
 
 
+value=value.replace("\\s".toRegex(), "")
 
+                               val obj=ParseObject.create(value)
+
+                                 val query=ParseQuery.getQuery<ParseObject>(value)
+
+
+                                 if (query.count() > 0){
+
+
+                                     query.whereEqualTo("name",currentUser.username.toString())
+                                    query.getFirstInBackground { `object`, e ->
+
+
+                                        `object`.increment("classAttended")
+                                        `object`.saveEventually()
+                                    }
                                  }
+                                 else{
+
+                                     obj.put("name",currentUser.username.toString())
+                                     obj.put("classAttended",1)
+                                     obj.saveEventually()
+                                 }
+
+
+
+
+
+
+//                                 val query=ParseQuery<ParseObject>("Csm")
+//                                 query.whereEqualTo("name",currentUser.username)
+//                                 query.findInBackground { objects, e ->
+//                                var count=1
+//                                    if(objects.size>=0){
+//
+//
+//                                         query.getFirstInBackground { `object`, e ->
+//                                             `object`.increment("classAttended")
+//
+//                                             Toast.makeText(this@Scanner,e.message,Toast.LENGTH_LONG).show()
+//
+//                                         }
+//
+//
+//
+//                                     } else   if (objects.size<1){
+//                                     obj.put("name",currentUser.username)
+//                                     obj.put("classAttended",count)
+//                                     obj.saveEventually()
+//                                 }
+//                                     else
+//                                     {
+//                                         Toast.makeText(this@Scanner,e.message,Toast.LENGTH_LONG).show()
+//                                     }
+                                // }
+
+//                                 obj.put("student",currentUser.username)
+//                                 obj.put("class_attended",1)
+//                                 obj.saveEventually()
+//                                 val query=ParseQuery.getQuery<ParseObject>("User")
+//                                 query.getInBackground(ParseUser.getCurrentUser().objectId) {
+//
+//                                     `object`, e ->
+//
+//                                     if (e==null)
+//                                     {
+//                                         `object`.getParseObject("verified")?.fetchIfNeededInBackground<ParseObject> {
+//                                             object2,
+//
+//                                             e2 ->if (e2==null)
+//                                         {
+//
+//                                             Toast.makeText(this@Scanner,object2.get("mas_261").toString(),Toast.LENGTH_LONG).show()
+//                                         }
+//
+//                                         }
+//                                     }
+//
+//
+//
+//                                 }
 
                                  dialog.dismiss()
 
