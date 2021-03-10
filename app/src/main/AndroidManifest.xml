@@ -3,7 +3,7 @@
     package="com.gmail.jamesgodwillarkoh.torchcatalog">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -15,13 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TorchCatalog">
+        <activity android:name=".StudentList">
+
+        </activity>
         <activity android:name=".Scanner">
 
         </activity>
         <activity android:name=".Login">
 
         </activity>
-
         <activity android:name=".StudentPortal" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>

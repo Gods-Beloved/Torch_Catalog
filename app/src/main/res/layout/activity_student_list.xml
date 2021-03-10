@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
     tools:context=".StudentList">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="listModel"
+            type="com.gmail.jamesgodwillarkoh.torchcatalog.CourseInfoModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".StudentList">
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           >
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:weightSum="10"
+               android:orientation="horizontal"
+               android:layout_height="wrap_content"
+               >
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_weight="6"
+                   android:gravity="center"
+                   android:layout_height="wrap_content"
+                   android:textSize="22sp"
+                   android:text="Student"
+                   />
+
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_weight="4"
+                   android:gravity="center"
+                   android:layout_height="wrap_content"
+                   android:textSize="22sp"
+                   android:text="Sessions"
+                   />
+
+           </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_marginStart="20dp"
+                    android:text="Hello Kwame Beter"
+                    android:textSize="18sp"
+                    android:layout_width="0dp" />
+
+                <TextView
+
+
+                    android:layout_weight="4"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Sessions"
+                    android:layout_width="0dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

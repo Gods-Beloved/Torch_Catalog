@@ -89,7 +89,7 @@ if (courseAdapter.networkerror == true)
         }
     }
 
-    override fun onItemClick(position: Int,intent: Intent) {
+    override fun onItemClick(position: Int,intent: Intent,intent2:Intent) {
 
  val intentView=intent
         startActivity(intentView)

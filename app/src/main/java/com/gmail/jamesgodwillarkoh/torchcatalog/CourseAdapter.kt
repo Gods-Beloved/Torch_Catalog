@@ -26,7 +26,7 @@ class CourseAdapter(val context: Context?): RecyclerView.Adapter<CourseAdapter.C
 
 
     interface  OnItemClickListener{
-        fun onItemClick( position: Int,intent: Intent)
+        fun onItemClick( position: Int,intent: Intent,intentLecture:Intent)
     }
 
 
@@ -113,11 +113,13 @@ mListener=listener
            val value=holder.courseCode.text.trim().toString()
 
             val intent=Intent(context,Scanner::class.java)
+            val intentLecture=Intent(context,StudentList::class.java)
             intent.putExtra("courseCode",value)
+            intentLecture.putExtra("courseCode",value)
 
 
 
-            mListener.onItemClick(position2,intent)
+            mListener.onItemClick(position2,intent,intentLecture)
         }
 //
 

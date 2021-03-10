@@ -40,8 +40,8 @@ private lateinit var recyclerView:RecyclerView
         return view
     }
 
-    override fun onItemClick(position: Int,intent: Intent) {
-        val intent2=intent
+    override fun onItemClick(position: Int,intent: Intent,intentLecturer:Intent) {
+        val intent2=intentLecturer
         startActivity(intent2)
         Toast.makeText(context,"Lecturers view",Toast.LENGTH_LONG).show()
     }
