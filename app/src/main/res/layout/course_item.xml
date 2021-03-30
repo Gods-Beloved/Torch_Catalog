@@ -3,7 +3,8 @@
     android:id="@+id/v_shimmer_load2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:shimmer_auto_start="true"
+    app:shimmer_base_alpha="1"
+    app:shimmer_auto_start="false"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -51,7 +52,15 @@
                 android:text="Computer Science"
                 />
 
-        </RelativeLayout>
 
+
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/v_join_video"
+            android:layout_gravity="end"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/video_call_red_900_24dp"
+            />
     </androidx.cardview.widget.CardView>
 </com.facebook.shimmer.ShimmerFrameLayout>

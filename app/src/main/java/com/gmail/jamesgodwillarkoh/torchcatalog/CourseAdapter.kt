@@ -5,18 +5,20 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.react.modules.core.PermissionListener
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.parse.FindCallback
 import com.parse.ParseObject
 import com.parse.ParseQuery
+import org.jitsi.meet.sdk.JitsiMeetActivity
+import org.jitsi.meet.sdk.JitsiMeetActivityDelegate
+import org.jitsi.meet.sdk.JitsiMeetActivityInterface
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
 import org.json.JSONArray
 
-class CourseAdapter(val context: Context?): RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
+class CourseAdapter(val context: Context?): RecyclerView.Adapter<CourseAdapter.CourseViewHolder>(){
 
    private lateinit var mListener: OnItemClickListener
 
@@ -26,7 +28,7 @@ class CourseAdapter(val context: Context?): RecyclerView.Adapter<CourseAdapter.C
 
 
     interface  OnItemClickListener{
-        fun onItemClick( position: Int,intent: Intent,intentLecture:Intent)
+        fun onItemClick( position: Int,intent: Intent)
     }
 
 
@@ -53,6 +55,8 @@ mListener=listener
         val courseCode:TextView=itemView.findViewById(R.id.v_coursecode)
 
         val shim:ShimmerFrameLayout=itemView.findViewById(R.id.v_shimmer_load2)
+
+        val joinVideo:ImageView=itemView.findViewById(R.id.v_join_video)
 
 
     }
@@ -86,6 +90,34 @@ mListener=listener
 
       //  val courseCode=holder.courseCode.text.trim().toString()
 
+        holder.joinVideo.setOnClickListener {
+            Toast.makeText(context,"Video Started",Toast.LENGTH_LONG).show()
+            val options = JitsiMeetConferenceOptions.Builder()
+                .setRoom("csm")
+                // Settings for audio and video
+                //.setAudioMuted(true)
+                //.setVideoMuted(true)
+                    .setFeatureFlag("add-people.enabled",false)
+                    .setFeatureFlag("audio-mute.enabled",false)
+                    .setFeatureFlag("kick-out.enabled",false)
+                    .setFeatureFlag("meeting-name.enabled",false)
+                    .setFeatureFlag("meeting-password.enabled",false)
+                    .setFeatureFlag("add-people.enable",false)
+                    .setFeatureFlag("overflow-menu.enabled",false)
+                    .setFeatureFlag("filmstrip.enabled",false)
+                    .setFeatureFlag("invite.enable",false)
+                    .setFeatureFlag("'toolbox.enabled",false)
+                    .setFeatureFlag("video-mute.enabled",true)
+                    .setVideoMuted(true)
+                    .setAudioMuted(true)
+                    .setFeatureFlag("video-mute.enabled",false)
+                .build()
+
+            // Launch the new activity with the given options. The launch() method takes care
+            // of creating the required Intent and passing the options.
+            JitsiMeetActivity.launch(context, options)
+        }
+
     holder.query.findInBackground { objects, e ->
         if (e==null)
         {
@@ -113,17 +145,17 @@ mListener=listener
            val value=holder.courseCode.text.trim().toString()
 
             val intent=Intent(context,Scanner::class.java)
-            val intentLecture=Intent(context,StudentList::class.java)
             intent.putExtra("courseCode",value)
-            intentLecture.putExtra("courseCode",value)
 
 
 
-            mListener.onItemClick(position2,intent,intentLecture)
+            mListener.onItemClick(position2,intent)
         }
 //
 
 
 
     }
+
+
 }

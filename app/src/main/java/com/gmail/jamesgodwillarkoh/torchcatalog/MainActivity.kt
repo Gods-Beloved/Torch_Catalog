@@ -17,6 +17,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.parse.ParseObject
 import com.parse.ParseUser
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -109,16 +112,19 @@ class MainActivity : AppCompatActivity() {
             }
             shimmer.showShimmer(true)
 
+            val c = Calendar.getInstance().time
+
+
 
 
             val user=ParseUser()
             user.setUsername(textUsername.text.toString())
-            user.put("Course",textCourse.text.toString())
             user.email=textEmail.text.toString()
             user.setPassword(textPasswordConfirm.text.toString())
+            user.put("course",textCourse.text.toString())
+           user.put("latest",c)
 
 
-            user.put("verified",ParseObject.createWithoutData("Enrolled","JJpOvVSDvl"))
 
 
                 user.signUpInBackground {

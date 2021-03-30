@@ -18,8 +18,8 @@
     1) Go to your App Dashboard at Back4App website.
     2) Navigate to app's settings : Click on Server Settings -> Core Settings block -> SETTINGS
     -->
-    <string name="back4app_app_id" translatable="false">Cw1ctWD3aLObVdymhSkTzy4UCQ9kYKvjqvq2hK1L</string>
-    <string name="back4app_client_key" translatable="false">75B1ikFg9moqLZT1Y86kWQ6V5RxRJ0g2t3w9zYHW</string>
+    <string name="back4app_app_id" translatable="false">FliqRaody1GNGi5Zj3EOTA59FRWR4myepw7UncCu</string>
+    <string name="back4app_client_key" translatable="false">g7JdZSSC6hOWGra3poFEiIJedHE2CXj0bcbsDNqz</string>
     <string name="search">Search</string>
     <string name="notifcations">Notifcations</string>
     <string name="settings">settings</string>

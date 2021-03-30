@@ -10,11 +10,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 
-class Home : Fragment(),CourseAdapter.OnItemClickListener {
+class Home : Fragment() {
 
-private lateinit var recyclerView:RecyclerView
-
-    private lateinit var courseAdapter:CourseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,23 +25,10 @@ private lateinit var recyclerView:RecyclerView
 
         val view=inflater.inflate(R.layout.fragment_home, container, false)
         // Inflate the layout for this fragment
-        recyclerView=view.findViewById(R.id.v_recycleView_home)
 
-
-
-        courseAdapter= CourseAdapter(context?.applicationContext)
-
-
-        courseAdapter.setOnItemClickListener(this@Home)
-        recyclerView.adapter=courseAdapter
         return view
     }
 
-    override fun onItemClick(position: Int,intent: Intent,intentLecturer:Intent) {
-        val intent2=intentLecturer
-        startActivity(intent2)
-        Toast.makeText(context,"Lecturers view",Toast.LENGTH_LONG).show()
-    }
 
 
 }
