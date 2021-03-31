@@ -11,18 +11,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.react.modules.core.PermissionListener
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.parse.ParseFile
 import com.parse.ParseObject
 import com.parse.ParseQuery
+import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 import org.jitsi.meet.sdk.*
 import timber.log.Timber
 import java.net.MalformedURLException
@@ -46,15 +53,26 @@ class Enroll : Fragment(),CourseAdapter.OnItemClickListener {
 
 
     private val ACTIVITY_REQUEST_CODE=1
+    private lateinit var shimmer:ShimmerFrameLayout
 
 private lateinit var recyclerView: RecyclerView
 
+    private lateinit var nestedDetails:NestedScrollView
 
-    private lateinit var fusedLocationClient:FusedLocationProviderClient
+private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
-    private lateinit var retryImage:ImageView
 
-    private lateinit var retryLoad:TextView
+
+    private lateinit var displayPic:CircleImageView
+
+    private lateinit var Lecturerposition: TextView
+    private lateinit var behaveDown: Button
+
+    private lateinit var fullName: TextView
+
+    private lateinit var department: TextView
+
+    private lateinit var researcg: TextView
 
     private lateinit var courseAdapter: CourseAdapter
 
@@ -95,6 +113,23 @@ private lateinit var recyclerView: RecyclerView
 
 
 
+        nestedDetails=view.findViewById(R.id.v_bottom_sheet)
+
+        bottomSheetBehavior=BottomSheetBehavior.from(nestedDetails)
+
+        displayPic=view.findViewById(R.id.lecture_image)
+        Lecturerposition=view.findViewById(R.id.v_lecturer_position)
+        fullName=view.findViewById(R.id.v_lecturer_name)
+       researcg=view.findViewById(R.id.v_lecturer_interest)
+       department=view.findViewById(R.id.v_lecturer_department)
+        shimmer=view.findViewById(R.id.v_shimmer)
+
+        behaveDown=view.findViewById(R.id.v_down_btn)
+
+
+behaveDown.setOnClickListener {
+    bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+}
 
 
         courseAdapter= CourseAdapter(context?.applicationContext)
@@ -199,13 +234,56 @@ LocalBroadcastManager.getInstance(requireContext().applicationContext).registerR
 
     override fun onItemClick(position: Int,intent: Intent) {
 
-
-
  val intentView=intent
         startActivity(intentView)
 
 
     }
+
+    override fun onItemClick(position: Int) {
+        shimmer.showShimmer(true)
+shimmer.startShimmer()
+
+        bottomSheetBehavior.state=BottomSheetBehavior.STATE_EXPANDED
+
+        val parse = ParseQuery.getQuery<ParseObject>("Course")
+
+        parse.findInBackground { objects, e ->
+
+            if (e==null){
+
+               val file=objects[position].getParseFile("image")?.url
+
+                Picasso.get()
+                        .load(file)
+                        .resize(96,96)
+                        .centerCrop()
+                        .error(R.drawable.baseline_update_disabled_black_24dp)
+                        .placeholder(R.drawable.baseline_person_black_24dp)
+                        .into(displayPic)
+
+                fullName.text=objects[position].get("lecturersFullName").toString()
+                researcg.text="Research/Interest:"+objects[position].get("research_areas").toString()
+                department.text="Dept: "+objects[position].get("department").toString()
+                Lecturerposition.text=objects[position].get("position").toString()
+
+
+shimmer.stopShimmer()
+                shimmer.hideShimmer()
+
+            }else{
+                Toast.makeText(context,e.message,Toast.LENGTH_LONG).show()
+                shimmer.stopShimmer()
+                shimmer.hideShimmer()
+
+            }
+
+        }
+
+
+    }
+
+
 
 
 }

@@ -22,14 +22,13 @@ class CourseAdapter(val context: Context?): RecyclerView.Adapter<CourseAdapter.C
 
    private lateinit var mListener: OnItemClickListener
 
-
-    var networkerror:Boolean=false
-
-
-
     interface  OnItemClickListener{
         fun onItemClick( position: Int,intent: Intent)
+        fun onItemClick(position: Int)
+
     }
+
+
 
 
     fun setOnItemClickListener(listener: OnItemClickListener){
@@ -85,10 +84,7 @@ mListener=listener
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-//       holder.courseCode.text= arrayCourse.getJSONArray(position).toString()
-//        holder.courseLecturer.text= arrayLecturers.getJSONArray(position).toString()
 
-      //  val courseCode=holder.courseCode.text.trim().toString()
 
         holder.joinVideo.setOnClickListener {
             Toast.makeText(context,"Video Started",Toast.LENGTH_LONG).show()
@@ -130,7 +126,7 @@ mListener=listener
 
         else{
             holder.shim.hideShimmer()
-            networkerror=true
+
 
 
         }
@@ -151,9 +147,13 @@ mListener=listener
 
             mListener.onItemClick(position2,intent)
         }
-//
 
+        holder.itemView.setOnLongClickListener {
+            val pos=holder.adapterPosition
+            mListener.onItemClick(pos)
+            return@setOnLongClickListener true
 
+        }
 
     }
 

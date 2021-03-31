@@ -58,13 +58,15 @@ dependencies {
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.25.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-      implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation 'com.cometchat:pro-android-chat-sdk:2.2.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation ('org.jitsi.react:jitsi-meet-sdk:3.0.0') { transitive = true }
 

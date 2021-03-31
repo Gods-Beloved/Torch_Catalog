@@ -17,6 +17,7 @@ import com.parse.LogInCallback
 import com.parse.ParseException
 import com.parse.ParseObject
 import com.parse.ParseUser
+import java.util.*
 
 class Login : AppCompatActivity() {
 
@@ -103,6 +104,12 @@ val username=textUsername.text.toString()
                 override fun done(user: ParseUser?, e: ParseException?) {
                     if (e==null)
                     {
+                        val c = Calendar.getInstance().time
+
+                        user?.put("latest",c)
+                        user?.saveEventually()
+
+
                         val intent=Intent(this@Login,StudentPortal::class.java)
                         startActivity(intent)
 
